@@ -4,20 +4,26 @@ WORKDIR /app
 
 # Install dependencies
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --only=production
 
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application with error handling
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
+ENV NODE_ENV=production
 
-# Install a simple HTTP server
+# Clean any existing builds
+RUN rm -rf .next out
+
+# Build with verbose output
+RUN npm run build || (echo "Build failed, trying with clean cache" && npm run clean && npm run build)
+
+# Install serve globally
 RUN npm install -g serve
 
 # Expose port
 EXPOSE 3000
 
-# Start the application using serve
+# Start the application
 CMD ["serve", "-s", "out", "-l", "3000"]

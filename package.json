@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "hospital-management",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,11 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "serve -s out -l 3000"
+    "serve": "serve -s out -l 3000",
+    "clean": "rm -rf .next out node_modules/.cache"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
-    "@next/swc-wasm-nodejs": "13.5.1",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
