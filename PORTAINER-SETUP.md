@@ -23,7 +23,7 @@ That's it! 🎉
 
 ## 🌐 Access Your Application
 
-After deployment (takes 2-3 minutes to build):
+After deployment (takes 3-5 minutes to build):
 ```
 http://your-server-ip:9999
 ```
@@ -85,6 +85,7 @@ networks:
 - **Check logs** in Portainer container logs
 - **Ensure** repository is public
 - **Verify** internet connection on server
+- **Wait longer** - build takes 3-5 minutes
 
 ### Port Issues
 Change port in stack:
@@ -102,6 +103,14 @@ deploy:
       memory: 2G
 ```
 
+### Build Taking Too Long
+The build process includes:
+1. **Installing dependencies** (1-2 minutes)
+2. **Building Next.js app** (2-3 minutes)
+3. **Starting server** (30 seconds)
+
+Total: **3-5 minutes** - be patient! ⏳
+
 ## 📊 System Requirements
 
 - **Memory**: 512MB minimum, 1GB recommended
@@ -109,12 +118,12 @@ deploy:
 - **Storage**: 2GB for build + runtime
 - **Port**: 9999 (configurable)
 
-## 🎯 Why This Works
+## 🎯 Why This Works Now
 
-✅ **No pre-built images needed**  
-✅ **Builds directly from repository**  
-✅ **Simple single-container setup**  
-✅ **All features included**  
+✅ **Fixed build configuration**  
+✅ **Uses static export** (more reliable)  
+✅ **Simple HTTP server** (serve package)  
+✅ **No complex dependencies**  
 ✅ **Production-ready**  
 
 ## 🔒 Security Notes
@@ -130,7 +139,18 @@ deploy:
 2. **Verify repository**: Make sure it's public and accessible
 3. **Check resources**: Ensure sufficient RAM/CPU
 4. **Port conflicts**: Try different port if 9999 is busy
+5. **Wait for build**: Build takes 3-5 minutes
 
 ## 🎉 Success!
 
 Once deployed, you'll have a **complete hospital management system** running on your server with all the features working perfectly!
+
+### 🏥 Features Available:
+- **Dashboard** with real-time statistics
+- **Emergency Room** management
+- **Patient Records** system
+- **Room Management** with floor plans
+- **Admission/Discharge** workflows
+- **Pharmacy** inventory
+- **Nurse Charting** system
+- **OPD** appointment management
