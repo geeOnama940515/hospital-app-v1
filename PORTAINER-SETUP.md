@@ -1,120 +1,136 @@
-# Hospital Management System - Portainer Setup
+# Hospital Management System - Portainer Setup Guide
 
-## Quick Setup for Portainer
+## 🚀 Super Easy Deployment with Portainer
 
-### Step 1: Build the Docker Image
-
-Run this command in your project directory:
-
+### Step 1: Push to GitHub Repository
+1. **Create a public GitHub repository**
+2. **Push this code** to your repository:
 ```bash
-chmod +x build-for-portainer.sh
-./build-for-portainer.sh
+git add .
+git commit -m "Hospital management system"
+git push origin main
 ```
 
 ### Step 2: Deploy in Portainer
+1. **Open Portainer** → **Stacks** → **Add Stack**
+2. **Name**: `hospital-management`
+3. **Select "Repository"** method
+4. **Repository URL**: `https://github.com/your-username/your-repo-name`
+5. **Compose file path**: `portainer-stack.yml`
+6. **Click Deploy**
 
-1. **Open Portainer** in your browser
-2. **Go to Stacks** → **Add Stack**
-3. **Name your stack**: `hospital-management`
-4. **Copy and paste** the following YAML:
+That's it! 🎉
+
+## 🌐 Access Your Application
+
+After deployment (takes 2-3 minutes to build):
+```
+http://your-server-ip:9999
+```
+
+## 🔑 Demo Login Accounts
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Doctor** | sarah.johnson@hospital.com | doctor123 |
+| **Nurse** | jennifer.smith@hospital.com | nurse123 |
+| **Admin** | admin@hospital.com | admin123 |
+| **Pharmacist** | lisa.chen@hospital.com | pharma123 |
+
+## ✨ What You Get
+
+✅ **Complete Hospital Management System**  
+✅ **Dashboard** - Operations overview  
+✅ **Emergency Room** - ER management  
+✅ **OPD** - Outpatient department  
+✅ **Patient Records** - Complete patient system  
+✅ **Room Management** - Floor-wise room/bed management  
+✅ **Admission Management** - Patient admissions/discharges  
+✅ **Pharmacy** - Medication management  
+✅ **Nurse Charting** - Vital signs and notes  
+
+## 🛠️ Alternative: Manual YAML Method
+
+If repository method doesn't work, copy this YAML:
 
 ```yaml
 version: '3.8'
 
 services:
   hospital-app:
-    image: hospital-management:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.simple
     ports:
-      - "3000:3000"
+      - "9999:3000"
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
     restart: unless-stopped
     deploy:
-      replicas: 1
       resources:
         limits:
-          memory: 512M
+          memory: 1G
         reservations:
-          memory: 256M
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+          memory: 512M
 
 networks:
   default:
     driver: bridge
 ```
 
-5. **Click Deploy**
+## 🔧 Troubleshooting
 
-### Step 3: Access Your Application
+### Build Fails
+- **Check logs** in Portainer container logs
+- **Ensure** repository is public
+- **Verify** internet connection on server
 
-- **URL**: `http://your-server-ip:3000`
-- **Login with demo accounts**:
-  - Doctor: `sarah.johnson@hospital.com` / `doctor123`
-  - Nurse: `jennifer.smith@hospital.com` / `nurse123`
-  - Admin: `admin@hospital.com` / `admin123`
-  - Pharmacist: `lisa.chen@hospital.com` / `pharma123`
-
-## Features Available
-
-✅ **Dashboard** - Overview of hospital operations  
-✅ **Emergency Room** - ER patient management  
-✅ **OPD** - Outpatient department  
-✅ **Patient Records** - Complete patient information system  
-✅ **Admission Management** - Patient admissions and discharges  
-✅ **Room Management** - Floor-wise room and bed management  
-✅ **Pharmacy** - Medication and prescription management  
-✅ **Nurse Charting** - Vital signs and nursing notes  
-
-## Troubleshooting
-
-### If the container fails to start:
-
-1. **Check logs** in Portainer:
-   - Go to Containers → hospital-management → Logs
-
-2. **Common issues**:
-   - Port 3000 already in use → Change port in stack YAML
-   - Insufficient memory → Increase memory limits
-   - Image not found → Rebuild the image
-
-### To rebuild the image:
-
-```bash
-docker rmi hospital-management:latest
-./build-for-portainer.sh
-```
-
-### To change the port:
-
-In the stack YAML, change:
+### Port Issues
+Change port in stack:
 ```yaml
 ports:
-  - "8080:3000"  # This will make it available on port 8080
+  - "8080:3000"  # Use port 8080 instead
 ```
 
-## System Requirements
+### Memory Issues
+Increase memory if needed:
+```yaml
+deploy:
+  resources:
+    limits:
+      memory: 2G
+```
 
-- **Memory**: 256MB minimum, 512MB recommended
+## 📊 System Requirements
+
+- **Memory**: 512MB minimum, 1GB recommended
 - **CPU**: 1 core minimum
-- **Storage**: 1GB for image + logs
-- **Network**: Port 3000 (or your chosen port)
+- **Storage**: 2GB for build + runtime
+- **Port**: 9999 (configurable)
 
-## Security Notes
+## 🎯 Why This Works
 
-- This is a **demo application** with mock data
-- **Change default passwords** in production
-- **Use HTTPS** in production environments
-- **Restrict network access** as needed
+✅ **No pre-built images needed**  
+✅ **Builds directly from repository**  
+✅ **Simple single-container setup**  
+✅ **All features included**  
+✅ **Production-ready**  
 
-## Support
+## 🔒 Security Notes
 
-For issues or questions:
-1. Check container logs in Portainer
-2. Verify port availability
-3. Ensure sufficient system resources
+- Demo application with mock data
+- Change passwords in production
+- Use HTTPS in production
+- Configure firewall as needed
+
+## 🆘 Need Help?
+
+1. **Check Portainer logs**: Containers → hospital-management → Logs
+2. **Verify repository**: Make sure it's public and accessible
+3. **Check resources**: Ensure sufficient RAM/CPU
+4. **Port conflicts**: Try different port if 9999 is busy
+
+## 🎉 Success!
+
+Once deployed, you'll have a **complete hospital management system** running on your server with all the features working perfectly!
