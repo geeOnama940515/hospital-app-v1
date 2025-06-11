@@ -54,7 +54,7 @@ export function EditPatientModal({ isOpen, onClose, patient, onSave }: EditPatie
   const removeAllergy = (allergyToRemove: string) => {
     setFormData(prev => ({
       ...prev,
-      allergies: prev.allergies.filter(allergy => allergy !== allergyToRemove)
+      allergies: prev.allergies.filter((allergy: string) => allergy !== allergyToRemove)
     }));
   };
 
@@ -71,7 +71,7 @@ export function EditPatientModal({ isOpen, onClose, patient, onSave }: EditPatie
   const removeCondition = (conditionToRemove: string) => {
     setFormData(prev => ({
       ...prev,
-      conditions: prev.conditions.filter(condition => condition !== conditionToRemove)
+      conditions: prev.conditions.filter((condition: string) => condition !== conditionToRemove)
     }));
   };
 
@@ -211,7 +211,7 @@ export function EditPatientModal({ isOpen, onClose, patient, onSave }: EditPatie
               </Button>
             </div>
             <div className="flex flex-wrap gap-2 mt-2">
-              {formData.allergies.map((allergy, index) => (
+              {formData.allergies.map((allergy: string, index: number) => (
                 <Badge key={index} variant="destructive" className="flex items-center space-x-1">
                   <span>{allergy}</span>
                   <X 
@@ -238,7 +238,7 @@ export function EditPatientModal({ isOpen, onClose, patient, onSave }: EditPatie
               </Button>
             </div>
             <div className="flex flex-wrap gap-2 mt-2">
-              {formData.conditions.map((condition, index) => (
+              {formData.conditions.map((condition: string, index: number) => (
                 <Badge key={index} variant="secondary" className="flex items-center space-x-1">
                   <span>{condition}</span>
                   <X 
