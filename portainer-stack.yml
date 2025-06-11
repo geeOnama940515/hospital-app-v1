@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.simple
     ports:
-      - "9999:3000"
+      - "9999:9999"
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
